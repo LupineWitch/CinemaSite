@@ -1,0 +1,37 @@
+<h3>Filmy:</h3>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Tytuł</th>
+      <th scope="col">Czas trwania</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      scope="row"
+      *ngFor="let movie of movieList"
+      [class.selected]="movie === selectedMovie"
+    >
+      <th>{{ movie.id }}</th>
+      <td>
+        {{ movie.title }}
+      </td>
+      <td>{{ movie.duration }} minut</td>
+      <td >
+        <app-delete-movie (click)="onSelect(movie)"
+          [selected]="selectedMovie"
+          (deleteMovie)="delete($event)"
+        >
+        </app-delete-movie>
+        <button (click)="onSelect(movie)" (click)="showEditForm()">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-add-movie (addNewMovie)="add($event)"></app-add-movie>
+<app-edit-movie *ngIf="show"
+  [moviesList]="movieList"
+  [selected]="selectedMovie"
+  (selectMovie)="onSelect($event)"
+></app-edit-movie>

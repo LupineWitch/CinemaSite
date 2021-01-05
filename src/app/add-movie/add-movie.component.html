@@ -1,0 +1,28 @@
+<form #f="ngForm" (ngSubmit)="verifyData(f.value.newMovie)">
+  Dodaj nowy film:
+  <div ngModelGroup="newMovie">
+    <input
+      type="text"
+      name="title"
+      #title="ngModel"
+      ngModel
+      minlength="2"
+      required
+    />
+    <div *ngIf="title.invalid && title.touched">
+      <div *ngIf="title.errors.required" style="color: red">
+        Tytuł jest wymagany!
+      </div>
+      <div *ngIf="title.errors.minlength" style="color: red">
+        Tytuł jest za krótki!
+      </div>
+    </div>
+    <input type="number" name="duration" #duration="ngModel" ngModel required />
+    <div *ngIf="duration.invalid && duration.touched">
+      <div *ngIf="duration.errors.required" style="color: red">
+        Należy podać czas trwania filmu!
+      </div>
+    </div>
+  </div>
+  <button type="submit">Add</button>
+</form>

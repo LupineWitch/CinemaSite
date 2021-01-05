@@ -1,0 +1,20 @@
+<h3>Sale kinowe:</h3>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Numer</th>
+      <th scope="col">Pojemność</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr scope="row"
+      *ngFor="let room of roomsList"
+      [class.selected]="room === selectedRoom"
+    >
+      <th >{{ room.nr }}</th>
+      <td>
+        {{ room.capacity }}
+      </td>
+    </tr>
+  </tbody>
+</table>
