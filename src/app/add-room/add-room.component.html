@@ -1,0 +1,24 @@
+<form #f="ngForm" (ngSubmit)="verifyData(f.value.newRoom)">
+  Dodaj nową salę kinową:
+  <div ngModelGroup="newRoom">
+    <input
+      type="number"
+      name="nr"
+      #nr="ngModel"
+      ngModel
+      required
+    />
+    <div *ngIf="nr.invalid && nr.touched">
+      <div *ngIf="nr.errors.required" style="color: red">
+        Numer sali jest wymagany!
+      </div>
+    </div>
+    <input type="number" name="capacity" #duration="ngModel" ngModel required />
+    <div *ngIf="duration.invalid && duration.touched">
+      <div *ngIf="duration.errors.required" style="color: red">
+        Pojemność sali jest wymagana
+      </div>
+    </div>
+  </div>
+  <button type="submit">Add</button>
+</form>

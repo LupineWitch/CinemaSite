@@ -10,6 +10,9 @@ import { RoomsComponentComponent } from './rooms-component/rooms-component.compo
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { DeleteMovieComponent } from './delete-movie/delete-movie.component';
 import { EditMovieComponent } from './edit-movie/edit-movie.component';
+import { AddRoomComponent } from './add-room/add-room.component';
+import { EditRoomComponent } from './edit-room/edit-room.component';
+import { DeleteRoomComponent } from './delete-room/delete-room.component';
 
 
 @NgModule({
@@ -21,6 +24,9 @@ import { EditMovieComponent } from './edit-movie/edit-movie.component';
     AddMovieComponent,
     DeleteMovieComponent,
     EditMovieComponent,
+    AddRoomComponent,
+    EditRoomComponent,
+    DeleteRoomComponent,
 
   ],
   imports: [

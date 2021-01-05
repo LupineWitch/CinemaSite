@@ -15,6 +15,20 @@
       <td>
         {{ room.capacity }}
       </td>
+      <td >
+        <app-delete-room (click)="onSelect(room)"
+          [selected]="selectedRoom"
+          (deleteRoom)="delete($event)"
+        >
+        </app-delete-room>
+        <button (click)="onSelect(room)" (click)="showEditForm()">Edit</button>
+      </td>
     </tr>
   </tbody>
 </table>
+<app-add-room [list]="roomsList" (addNewRoom)="add($event)"></app-add-room>
+<app-edit-room *ngIf="show"
+  [roomsList]="roomsList"
+  [selected]="selectedRoom"
+  (selectroom)="onSelect($event)"
+></app-edit-room>

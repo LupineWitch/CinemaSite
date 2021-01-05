@@ -12,6 +12,7 @@ export class RoomsComponentComponent implements OnInit {
   selectedRoom: Room = null;
   selected = false;
   newRoom = Room;
+  show = false;
 
   constructor() { }
 
@@ -28,5 +29,20 @@ export class RoomsComponentComponent implements OnInit {
     if (!this.selected) {
       this.selectedRoom = room;
     }
+  }
+
+  add(room: Room): void {
+    this.roomsList.push(room);
+  }
+
+  delete(which: number): void {
+    console.log("which" + which);
+    let idx = this.roomsList.findIndex(x => x.nr == which);
+    console.log("idx" + idx);
+    this.roomsList.splice(idx,1);
+  }
+
+  showEditForm(): void {
+    this.show = true;
   }
 }
