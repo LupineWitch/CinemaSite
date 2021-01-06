@@ -10,6 +10,7 @@ export class EditMovieComponent implements OnInit {
   @Input() moviesList: Movie[];
   @Input() selected: Movie;
   @Output() selectMovie: EventEmitter<Movie> = new EventEmitter();
+  @Output() editMovie: EventEmitter<Movie> = new EventEmitter();
 
   constructor() { }
 
@@ -23,5 +24,6 @@ export class EditMovieComponent implements OnInit {
     formValues.id = this.selected.id;
     this.moviesList[idx] = formValues;
     this.selectMovie.emit(null);
+    this.editMovie.emit(formValues);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as data from './Data.json';
+import { AppService } from './app.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,8 +9,9 @@ import * as data from './Data.json';
 export class AppComponent {
   title = 'CinemaApp';
 
+  constructor(private appService: AppService) {}
+
   ngOnInit() {
-    console.log("Hello world!");
-    //TODO: add reading from json file
+
   }
 }

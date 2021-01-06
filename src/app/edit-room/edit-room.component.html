@@ -1,0 +1,12 @@
+<form #f="ngForm" (ngSubmit)="verifyData(f.value.editedRoom)">
+  Edytuj pojemność sali:
+  <div ngModelGroup="editedRoom">
+    <input type="number" name="capacity" #duration="ngModel" ngModel required />
+    <div *ngIf="duration.invalid && duration.touched">
+      <div *ngIf="duration.errors.required" style="color: red">
+        Pojemność sali jest wymagana
+      </div>
+    </div>
+  </div>
+  <button type="submit">Zapisz</button>
+</form>
