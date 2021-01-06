@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SeansesComponentComponent } from './seanses-component/seanses-component.component';
@@ -14,7 +14,14 @@ import { EditMovieComponent } from './edit-movie/edit-movie.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 import { DeleteRoomComponent } from './delete-room/delete-room.component';
+import { Router, RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+  { path: 'movies', component: MoviesComponentComponent },
+  { path: 'rooms', component: RoomsComponentComponent },
+  { path: 'seanses', component: SeansesComponentComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+];
 
 @NgModule({
   declarations: [
@@ -28,15 +35,9 @@ import { DeleteRoomComponent } from './delete-room/delete-room.component';
     AddRoomComponent,
     EditRoomComponent,
     DeleteRoomComponent,
-
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(routes)],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

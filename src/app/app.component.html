@@ -1,5 +1,34 @@
 <div class="all">
-  <app-rooms-component></app-rooms-component>
-  <app-movies-component></app-movies-component>
-  <app-seanses-component></app-seanses-component>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button
+          type="button"
+          class="navbar-toggle"
+          data-toggle="collapse"
+          data-target="#myNavbar"
+        >
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/home">CinemaCenter</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/movies">Filmy</a></li>
+          <li><a href="/seanses">Seanse</a></li>
+          <li><a href="/rooms">Sale kinowe</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+  <footer id="footer" class="container-fluid text-center">
+    <p>
+      @2021 CinemaApp - projekt AOoiK - Lipiszko Stasiulewicz
+    </p>
+  </footer>
 </div>

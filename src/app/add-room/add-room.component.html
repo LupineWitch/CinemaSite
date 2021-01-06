@@ -1,24 +1,28 @@
 <form #f="ngForm" (ngSubmit)="verifyData(f.value.newRoom)">
-  Dodaj nową salę kinową:
   <div ngModelGroup="newRoom">
+    Dodaj nową salę kinową:
     <input
+      id="input"
       type="number"
       name="nr"
       #nr="ngModel"
       ngModel
       required
+      placeholder="Numer"
     />
-    <div *ngIf="nr.invalid && nr.touched">
-      <div *ngIf="nr.errors.required" style="color: red">
+    <input id="input" type="number" name="capacity" #duration="ngModel" ngModel required placeholder="Pojemność"/>
+    <button id="saveButton" type="submit">Dodaj<span
+      id="saveButton"
+      class="glyphicon glyphicon-ok"
+      aria-hidden="true"
+    ></span></button>
+    <div *ngIf="(nr.invalid && nr.touched) || (duration.invalid && duration.touched)">
+      <span *ngIf="nr.errors.required" style="color: red">
         Numer sali jest wymagany!
-      </div>
-    </div>
-    <input type="number" name="capacity" #duration="ngModel" ngModel required />
-    <div *ngIf="duration.invalid && duration.touched">
-      <div *ngIf="duration.errors.required" style="color: red">
+      </span>
+      <span *ngIf="duration.errors.required" style="color: red">
         Pojemność sali jest wymagana
-      </div>
+      </span>
     </div>
   </div>
-  <button type="submit">Add</button>
 </form>
