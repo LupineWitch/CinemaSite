@@ -16,12 +16,12 @@
         {{ room.capacity }}
       </td>
       <td >
-        <app-delete-room (click)="onSelect(room)"
+        <app-delete-room (mouseenter)="onSelect(room)" (click)="onSelect(room)"
           [selected]="selectedRoom"
           (deleteRoom)="delete($event)"
         >
         </app-delete-room>
-        <button (click)="onSelect(room)" (click)="showEditForm()">Edit</button>
+        <button (mouseenter)="onSelect(room)" (click)="onSelect(room)" (click)="showEditForm()">Edit</button>
       </td>
     </tr>
   </tbody>
@@ -31,4 +31,5 @@
   [roomsList]="roomsList"
   [selected]="selectedRoom"
   (selectroom)="onSelect($event)"
+  (editRoom)="edit($event)"
 ></app-edit-room>

@@ -37,6 +37,7 @@ export class RoomsComponentComponent implements OnInit {
 
   add(room: Room): void {
     this.roomsList.push(room);
+    this.appService.addRoom(room).subscribe((x) => console.log(x));
   }
 
   delete(which: number): void {
@@ -44,6 +45,11 @@ export class RoomsComponentComponent implements OnInit {
     let idx = this.roomsList.findIndex((x) => x.nr == which);
     console.log('idx' + idx);
     this.roomsList.splice(idx, 1);
+    this.appService.deleteRoom(which).subscribe((x) => console.log(x));
+  }
+
+  edit(room: Room): void {
+    this.appService.editRoom(room.nr,room).subscribe((x) => console.log(x));
   }
 
   showEditForm(): void {

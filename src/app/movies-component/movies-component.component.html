@@ -19,12 +19,12 @@
       </td>
       <td>{{ movie.duration }} minut</td>
       <td >
-        <app-delete-movie (click)="onSelect(movie)"
+        <app-delete-movie (mouseenter)="onSelect(movie)" (click)="onSelect(movie)"
           [selected]="selectedMovie"
           (deleteMovie)="delete($event)"
         >
         </app-delete-movie>
-        <button (click)="onSelect(movie)" (click)="showEditForm()">Edit</button>
+        <button (mouseenter)="onSelect(movie)" (click)="onSelect(movie)" (click)="showEditForm()">Edit</button>
       </td>
     </tr>
   </tbody>
@@ -34,4 +34,5 @@
   [moviesList]="movieList"
   [selected]="selectedMovie"
   (selectMovie)="onSelect($event)"
+  (editMovie)="edit($event)"
 ></app-edit-movie>

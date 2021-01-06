@@ -9,7 +9,8 @@ import { Room } from '../room';
 export class EditRoomComponent implements OnInit {
   @Input() roomsList: Room[];
   @Input() selected: Room;
-  @Output() selectMovie: EventEmitter<Room> = new EventEmitter();
+  @Output() selectRoom: EventEmitter<Room> = new EventEmitter();
+  @Output() editRoom: EventEmitter<Room> = new EventEmitter();
 
   constructor() { }
 
@@ -17,11 +18,11 @@ export class EditRoomComponent implements OnInit {
   }
 
   verifyData(formValues: Room): void {
-    //TODO: id bugged - if movie with the same name
     if (formValues.capacity < 10) return;
     let idx = this.roomsList.findIndex(x => x.nr == this.selected.nr);
     formValues.nr = this.roomsList[idx].nr;
     this.roomsList[idx] = formValues;
-    this.selectMovie.emit(null);
+    this.selectRoom.emit(null);
+    this.editRoom.emit(formValues);
   }
 }
