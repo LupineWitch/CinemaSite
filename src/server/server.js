@@ -11,11 +11,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Cinema server');
 });
 
-app.get('/api/movies', (req, res) => {
+app.get('/movies', (req, res) => {
   fs.readFile('./data.json', 'utf8', (err, dataJson) => {
       if (err) {
           console.log("File read failed in GET /data: "+ err);
@@ -29,7 +29,7 @@ app.get('/api/movies', (req, res) => {
   });
 });
 
-app.get('/api/rooms', (req, res) => {
+app.get('/rooms', (req, res) => {
   fs.readFile('./data.json', 'utf8', (err, dataJson) => {
       if (err) {
           console.log("File read failed in GET /data: "+ err);
@@ -43,7 +43,7 @@ app.get('/api/rooms', (req, res) => {
   });
 });
 
-app.get('/api/seanses', (req, res) => {
+app.get('/seanses', (req, res) => {
   fs.readFile('./data.json', 'utf8', (err, dataJson) => {
       if (err) {
           console.log("File read failed in GET /data: "+ err);

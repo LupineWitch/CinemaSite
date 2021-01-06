@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import * as data from '../Data.json';
 import { Room } from '../room';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-rooms-component',
   templateUrl: './rooms-component.component.html',
-  styleUrls: ['./rooms-component.component.css']
+  styleUrls: ['./rooms-component.component.css'],
 })
 export class RoomsComponentComponent implements OnInit {
-  roomsList = data.Rooms;
+  roomsList: Room[];
   selectedRoom: Room = null;
   selected = false;
   newRoom = Room;
   show = false;
 
-  constructor() { }
+  constructor(private appService: AppService) {}
 
   ngOnInit(): void {
+    this.appService.getRooms().subscribe((rooms: Room[]) => {
+      this.roomsList = rooms;
+      console.log(rooms);
+    });
   }
 
   onSelect(room: Room): void {
@@ -36,10 +40,10 @@ export class RoomsComponentComponent implements OnInit {
   }
 
   delete(which: number): void {
-    console.log("which" + which);
-    let idx = this.roomsList.findIndex(x => x.nr == which);
-    console.log("idx" + idx);
-    this.roomsList.splice(idx,1);
+    console.log('which' + which);
+    let idx = this.roomsList.findIndex((x) => x.nr == which);
+    console.log('idx' + idx);
+    this.roomsList.splice(idx, 1);
   }
 
   showEditForm(): void {
