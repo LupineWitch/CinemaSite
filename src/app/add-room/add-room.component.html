@@ -10,18 +10,19 @@
       required
       placeholder="Numer"
     />
-    <input id="input" type="number" name="capacity" #duration="ngModel" ngModel required placeholder="Pojemność"/>
+    <input id="input" type="number" name="capacity" #capacity="ngModel" ngModel required placeholder="Pojemność"/>
     <button id="saveButton" type="submit">Dodaj<span
       id="saveButton"
       class="glyphicon glyphicon-ok"
       aria-hidden="true"
     ></span></button>
-    <div *ngIf="(nr.invalid && nr.touched) || (duration.invalid && duration.touched)">
-      <span *ngIf="nr.errors.required" style="color: red">
+    <div>
+      <span *ngIf="errorMessage.length!=0" style="color: red">{{errorMessage}}</span>
+      <span *ngIf="nr.invalid && nr.touched && nr.errors.required" style="color: red">
         Numer sali jest wymagany!
       </span>
-      <span *ngIf="duration.errors.required" style="color: red">
-        Pojemność sali jest wymagana
+      <span *ngIf="capacity.invalid && capacity.touched && capacity.errors.required" style="color: red">
+        Pojemność sali jest wymagana!
       </span>
     </div>
   </div>

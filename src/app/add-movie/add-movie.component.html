@@ -28,13 +28,14 @@
         aria-hidden="true"
       ></span>
     </button>
-    <div *ngIf="(title.invalid && title.touched) || (duration.invalid && duration.touched)">
-      <span *ngIf="title.errors.required" style="color: red">Tytuł jest wymagany!
+    <div>
+      <span *ngIf="errorMessage.length!=0" style="color: red">{{errorMessage}}</span>
+      <span *ngIf="title.invalid && title.touched && title.errors.required" style="color: red">Tytuł jest wymagany!
       </span>
-      <span *ngIf="title.errors.minlength" style="color: red">
+      <span *ngIf="title.invalid && title.touched && title.errors.minlength" style="color: red">
         Tytuł jest za krótki!
       </span>
-      <span *ngIf="duration.errors.required" style="color: red">
+      <span *ngIf="duration.invalid && duration.touched && duration.errors.required" style="color: red">
         Należy podać czas trwania filmu!
       </span>
     </div>

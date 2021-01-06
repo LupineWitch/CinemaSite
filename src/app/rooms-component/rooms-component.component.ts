@@ -36,11 +36,13 @@ export class RoomsComponentComponent implements OnInit {
   }
 
   add(room: Room): void {
+    this.show = false;
     this.roomsList.push(room);
     this.appService.addRoom(room).subscribe((x) => console.log(x));
   }
 
   delete(which: number): void {
+    this.show = false;
     console.log('which' + which);
     let idx = this.roomsList.findIndex((x) => x.nr == which);
     console.log('idx' + idx);
@@ -50,9 +52,14 @@ export class RoomsComponentComponent implements OnInit {
 
   edit(room: Room): void {
     this.appService.editRoom(room.nr,room).subscribe((x) => console.log(x));
+    this.show = false;
   }
 
   showEditForm(): void {
     this.show = true;
+  }
+
+  hideEditForm(): void {
+    this.show = false;
   }
 }

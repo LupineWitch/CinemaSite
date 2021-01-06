@@ -1,7 +1,8 @@
 <form #f="ngForm" (ngSubmit)="verifyData(f.value.editedMovie)">
   <div ngModelGroup="editedMovie">
     Edytuj film:
-    <input id="input"
+    <input
+      id="input"
       type="text"
       name="title"
       #title="ngModel"
@@ -10,20 +11,43 @@
       required
       placeholder="Tytuł"
     />
-    <input id="input" type="number" name="duration" #duration="ngModel" ngModel required placeholder="Czas trwania"/>
-    <div *ngIf="(title.invalid && title.touched) || (duration.invalid && duration.touched)">
-      <span *ngIf="title.errors.required" style="color: red">
-        Tytuł jest wymagany!
+    <input
+      id="input"
+      type="number"
+      name="duration"
+      #duration="ngModel"
+      ngModel
+      required
+      placeholder="Czas trwania"
+    />
+    <button type="submit">
+      Zapisz<span
+        id="saveButton"
+        class="glyphicon glyphicon-ok"
+        aria-hidden="true"
+      ></span>
+    </button>
+    <div>
+      <span *ngIf="errorMessage.length != 0" style="color: red">{{
+        errorMessage
+      }}</span>
+      <span
+        *ngIf="title.invalid && title.touched && title.errors.required"
+        style="color: red"
+        >Tytuł jest wymagany!
       </span>
-      <span *ngIf="title.errors.minlength" style="color: red">
+      <span
+        *ngIf="title.invalid && title.touched && title.errors.minlength"
+        style="color: red"
+      >
         Tytuł jest za krótki!
       </span>
-      <span *ngIf="duration.errors.required" style="color: red">
+      <span
+        *ngIf="duration.invalid && duration.touched && duration.errors.required"
+        style="color: red"
+      >
         Należy podać czas trwania filmu!
       </span>
     </div>
-    <button type="submit">Zapisz<span id="saveButton"
-      class="glyphicon glyphicon-ok"
-      aria-hidden="true"></span></button>
   </div>
 </form>

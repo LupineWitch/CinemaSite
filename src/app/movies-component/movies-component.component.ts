@@ -56,4 +56,8 @@ export class MoviesComponentComponent implements OnInit {
   showEditForm(): void {
     this.show = true;
   }
+
+  hideEditForm(): void {
+    this.show = false;
+  }
 }

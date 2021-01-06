@@ -1,5 +1,5 @@
 <h3>Sale kinowe</h3>
-<app-add-room [list]="roomsList" (addNewRoom)="add($event)"></app-add-room> <br>
+<app-add-room (click)="hideEditForm()" [list]="roomsList" (addNewRoom)="add($event)"></app-add-room> <br>
 <table class="table table-striped table-bordered">
   <thead>
     <tr>

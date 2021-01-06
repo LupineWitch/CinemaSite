@@ -1,5 +1,10 @@
 <h3>Filmy</h3>
-<app-add-movie (addNewMovie)="add($event)"></app-add-movie> <br />
+<app-add-movie
+  (click)="hideEditForm()"
+  [moviesList]="movieList"
+  (addNewMovie)="add($event)"
+></app-add-movie>
+<br />
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
@@ -19,7 +24,7 @@
       <td>
         {{ movie.title }}
       </td>
-      <td style="text-align: center">{{ movie.duration }} minut</td>
+      <td style="text-align: center">{{ movie.duration }} min.</td>
       <td style="text-align: center">
         <app-delete-movie
           (mouseenter)="onSelect(movie)"

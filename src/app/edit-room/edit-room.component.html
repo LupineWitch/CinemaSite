@@ -1,13 +1,14 @@
 <form #f="ngForm" (ngSubmit)="verifyData(f.value.editedRoom)">
   <div ngModelGroup="editedRoom">
     Edytuj pojemność sali:
-    <input id="input" type="number" name="capacity" #duration="ngModel" ngModel required />
+    <input id="input" type="number" name="capacity" #capacity="ngModel" ngModel required />
     <button type="submit">Zapisz<span id="saveButton"
       class="glyphicon glyphicon-ok"
       aria-hidden="true"></span></button>
-      <div *ngIf="duration.invalid && duration.touched">
-        <span *ngIf="duration.errors.required" style="color: red">
-          Pojemność sali jest wymagana
+      <div>
+        <span *ngIf="errorMessage.length!=0" style="color: red">{{errorMessage}}</span>
+        <span *ngIf="capacity.invalid && capacity.touched && capacity.errors.required" style="color: red">
+          Pojemność sali jest wymagana!
         </span>
       </div>
   </div>

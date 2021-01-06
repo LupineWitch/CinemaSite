@@ -7,6 +7,7 @@ import { Room } from '../room';
   styleUrls: ['./add-room.component.css'],
 })
 export class AddRoomComponent implements OnInit {
+  errorMessage: string = "";
   newRoom: Room;
   @Input() list: Room[];
   @Output() addNewRoom: EventEmitter<Room> = new EventEmitter();
@@ -15,10 +16,18 @@ export class AddRoomComponent implements OnInit {
   ngOnInit(): void {}
 
   verifyData(formValues: Room): void {
-    //TODO: id bugged - if movie with the same name
-    if (formValues.nr < 0) return;
-    if (this.list.find(x => x.nr == formValues.nr)) return; //TODO: nr must be unique
-    if (formValues.capacity < 10) return;
+    if (formValues.nr < 0) {
+      this.errorMessage = "Numer sali nie może być ujemny!"
+      return;}
+    if (this.list.find(x => x.nr == formValues.nr)) {
+      this.errorMessage = "Numer sali jest już zajęty!"
+      return;
+    }
+    if (formValues.capacity < 10) {
+      this.errorMessage = "Pojemność nie może być mniejsza niż 10!"
+      return;
+    }
+    this.errorMessage="";
     this.newRoom = formValues;
     this.addNewRoom.emit(this.newRoom);
   }
