@@ -1,1 +1,1 @@
-{"Movies":[{"title":"asd12","duration":213,"id":3},{"title":"Uciekające kurczaki","duration":115,"id":4},{"title":"Mechaniczna pomarańcza","duration":100,"id":5}],"Rooms":[{"nr":2,"capacity":120},{"nr":3,"capacity":124},{"capacity":100,"nr":1}],"Seanses":[]}
+{"Movies":[{"title":"Uciekające kurczaki","duration":120,"id":1}],"Rooms":[{"capacity":20,"nr":2},{"nr":3,"capacity":124},{"capacity":30,"nr":1},{"nr":234,"capacity":44},{"nr":23,"capacity":44},{"nr":10,"capacity":12},{"nr":13,"capacity":10},{"nr":22,"capacity":125},{"nr":131,"capacity":12}],"Seanses":[]}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Movie } from '../movie';
 
 @Component({
@@ -7,7 +7,9 @@ import { Movie } from '../movie';
   styleUrls: ['./add-movie.component.css']
 })
 export class AddMovieComponent implements OnInit {
+  errorMessage: string = "";
   newMovie: Movie;
+  @Input() moviesList: Movie[];
   @Output() addNewMovie: EventEmitter<Movie> = new EventEmitter()
   constructor() { }
 
@@ -15,9 +17,16 @@ export class AddMovieComponent implements OnInit {
   }
 
   verifyData(formValues: Movie): void {
-    //TODO: id bugged - if movie with the same name
+    if(this.moviesList.find(x => x.title === formValues.title && x.duration == formValues.duration)){
+      this.errorMessage = "Film już istnieje w bazie, proszę wprowadzić inne dane!"
+      return;
+    }
     if(formValues.title.length<2) return;
-    if(formValues.duration < 1) return;
+    if(formValues.duration < 1) {
+      this.errorMessage = "Film nie może trwać krócej niż 1 minuta!"
+      return;
+    }
+    this.errorMessage = "";
     this.newMovie = formValues;
     this.addNewMovie.emit(this.newMovie);
   }
