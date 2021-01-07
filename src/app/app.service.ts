@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Movie } from './movie';
 import { Room } from './room';
+import { Seance } from './seance';
 
 @Injectable({
   providedIn: 'root',
@@ -45,5 +46,20 @@ export class AppService {
 
   getSeanses() {
     return this.http.get(this.rootURL + '/seanses');
+  }
+  addScreening(newScreening:Seance)
+  {
+    return this.http.post(this.rootURL + '/seanses', newScreening);
+
+  }
+
+  deleteScreening(nr:number)
+  {
+    return this.http.delete(this.rootURL + '/seanses/' + nr);
+  }
+
+  editScreening(id:number, editedScreening:Seance)
+  {
+    return this.http.put(this.rootURL +'/seanses/'+ id, editedScreening);
   }
 }
