@@ -26,6 +26,7 @@ export class DeleteMovieComponent implements OnInit {
     });
     if (this.seanses.find(x => x.movie.id == this.selected.id)){
       Swal.fire('Ostrzeżenie!', 'Nie można usunąć filmu, dla którego istnieją seanse', 'warning');
+      return;
     }
     console.log(this.selected);
     this.deleteMovie.emit(this.selected.id);

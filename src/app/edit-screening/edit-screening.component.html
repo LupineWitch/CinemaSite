@@ -1,0 +1,42 @@
+<p>edit-screening works!</p>
+<form #f="ngForm" (ngSubmit)="verifyData(f.value.newScreening)">
+    <div ngModelGroup="newScreening">
+      Edytuj seans:
+      <select
+      id="input"
+      type="Movie"
+      name="movie"
+      #selectedMovie="ngModel"
+      ngModel
+      required
+      placeholder="Film"
+      >
+        <option *ngFor="let x of movieList" [ngValue]="x">
+          {{ x.title }}
+        </option>
+      </select>
+      <select
+      id="input"
+      type="Room"
+      name="room"
+      #selectedRoom="ngModel"
+      ngModel
+      required
+      placeholder="Sala"
+      >
+        <option *ngFor="let x of roomList" [ngValue]="x">
+          {{ x.nr }}
+        </option>
+      </select>
+      <button id="saveButton" type="submit">
+        Zapisz<span
+          id="saveButton"
+          class="glyphicon glyphicon-ok"
+          aria-hidden="true"
+        ></span>
+      </button>
+      <div>
+      <span *ngIf="errorMessage.length!=0" style="color: red">{{errorMessage}}</span>
+    </div>
+    </div>
+  </form>

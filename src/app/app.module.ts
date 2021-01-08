@@ -15,6 +15,10 @@ import { AddRoomComponent } from './add-room/add-room.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 import { DeleteRoomComponent } from './delete-room/delete-room.component';
 import { Router, RouterModule, Routes } from '@angular/router';
+import { AddScreeningComponent } from './add-screening/add-screening.component';
+import { DeleteScreeningComponent } from './delete-screening/delete-screening.component';
+import { EditScreeningComponent } from './edit-screening/edit-screening.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponentComponent },
@@ -35,8 +39,11 @@ const routes: Routes = [
     AddRoomComponent,
     EditRoomComponent,
     DeleteRoomComponent,
+    AddScreeningComponent,
+    DeleteScreeningComponent,
+    EditScreeningComponent,
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule.forRoot(routes), NoopAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

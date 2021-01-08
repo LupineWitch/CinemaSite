@@ -2,6 +2,7 @@ const fs = require("fs");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const { Console } = require("console");
 const app = express();
 
 app.use(cors());
@@ -314,6 +315,139 @@ app.get("/seanses", (req, res) => {
     var seanses = data.Seanses;
     console.log("GET: /seanses");
     res.send(seanses);
+  });
+});
+
+
+app.post("/seanses", (req, res) => {
+  fs.readFile("./data.json", "utf8", (err, dataJson) => {
+    if (err) {
+      console.log("File read failed in POST /seanses: " + err);
+      res.status(500).send("File read failed");
+      return;
+    }
+    var data = JSON.parse(dataJson);
+    var screening = data.Seanses.find((s) => s.id == req.body.id);
+    if (!screening) {
+      data.Seanses.push(req.body);
+      var newList = JSON.stringify(data);
+      fs.writeFile("./data.json", newList, (err) => {
+        if (err) {
+          console.log("Error writing file in POST /seanses: " + err);
+          res.status(500).send("Error writing file data.json");
+        } else {
+          res.status(201).send(req.body);
+          console.log(
+            "Successfully wrote file data.json and added new screening with id = " +
+              req.body.id
+          );
+        }
+      });
+    } else {
+      console.log("Screening by id = " + req.body.id + " already exists");
+      res
+        .status(500)
+        .send("Screening by id = " + req.body.id + " already exists");
+      return;
+    }
+  });
+});
+
+
+
+app.delete("/seanses/:id", (req, res) => {
+  fs.readFile("./data.json", "utf8", (err, dataJson) => {
+    if (err) {
+      console.log("File read failed in DELETE /seanses: " + err);
+      res.status(500).send("File read failed");
+      return;
+    }
+    var data = JSON.parse(dataJson);
+    var idx = data.Seanses.findIndex(
+      (s) => s.id == req.params.id
+    );
+  console.log("idx="+idx);
+    if (idx != -1) {
+      data.Seanses.splice(idx, 1);
+      var newList = JSON.stringify(data);
+      fs.writeFile("./data.json", newList, (err) => {
+        if (err) {
+          console.log(
+            "Error writing file in DELETE /seanses/" + req.params.id + ": " + err
+          );
+          res.status(500).send("Error writing file data.json");
+        } else {
+          res.status(204).send();
+          console.log("Successfully deleted screening with id = " + req.params.id);
+        }
+      });
+    } else {
+      console.log("screening by id = " + req.params.id + " does not exists");
+      res
+        .status(500)
+        .send("screening by id = " + req.params.id + " does not exists");
+      return;
+    }
+  });
+});
+
+
+app.put("/seanses/:id", (req, res) => {
+  fs.readFile("./data.json", "utf8", (err, dataJson) => {
+    if (err) {
+      console.log(
+        "File read failed in PUT /seanses/" + req.params.id + ": " + err
+      );
+      res.status(500).send("File read failed");
+      return;
+    }
+    var data = JSON.parse(dataJson);
+    var screeningBody = data.Seanses.find((s) => s.id == req.body.id);
+
+    if (screeningBody && screeningBody.id != req.params.id) {
+      console.log("Screening by id = " + screeningBody.id + " already exists");
+      res
+        .status(500)
+        .send("Screening by id = " + screeningBody.id + " already exists");
+      return;
+    }
+    var screening = data.Seanses.find((s) => s.id == req.params.id);
+    if (!screening) {
+      data.Seanses.push(req.body);
+      var newList = JSON.stringify(data);
+      fs.writeFile("./data.json", newList, (err) => {
+        if (err) {
+          console.log(
+            "Error writing file in PUT /seanses/" + req.params.id + ": " + err
+          );
+          res.status(500).send("Error writing file data.json");
+        } else {
+          res.status(201).send(req.body);
+          console.log(
+            "Successfully wrote file data.json and added new screening with id = " +
+              req.body.id
+          );
+        }
+      });
+    } else {
+      var idx = data.Seanses.findIndex((m) => m.id == req.params.id);
+      data.Seanses[idx] = req.body;
+      var newList = JSON.stringify(data);
+      fs.writeFile("./data.json", newList, (err) => {
+        if (err) {
+          console.log(
+            "Error writing file in PUT /seanses/" + req.params.id + ": " + err
+          );
+          res.status(500).send("Error writing file data.json");
+        } else {
+          res.status(200).send(req.body);
+          console.log(
+            "Successfully wrote file data.json and edit screening with old id = " +
+              req.params.id
+          );
+        }
+      });
+    }
   });
 });
 
