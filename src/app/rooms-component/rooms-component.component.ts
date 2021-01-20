@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Room } from '../room';
 import { AppService } from '../app.service';
+import { Seance } from '../seance';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rooms-component',
@@ -13,7 +15,7 @@ export class RoomsComponentComponent implements OnInit {
   selected = false;
   newRoom = Room;
   show = false;
-
+  seanses: Seance[];
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
@@ -42,6 +44,14 @@ export class RoomsComponentComponent implements OnInit {
   }
 
   delete(which: number): void {
+    this.appService.getSeanses().subscribe((seansesList: Seance[]) => {
+      this.seanses = seansesList;
+      console.log(seansesList);
+    });
+    if (this.seanses.find(x => x.room.nr == which)){
+      Swal.fire('Ostrzeżenie!', 'Nie można usunąć sali, w której zaplanowane są seanse', 'warning');
+      return;
+    }
     this.show = false;
     console.log('which' + which);
     let idx = this.roomsList.findIndex((x) => x.nr == which);

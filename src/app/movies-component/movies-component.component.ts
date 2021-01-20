@@ -5,6 +5,8 @@ import {
 } from '@angular/core';
 import { Movie } from '../movie';
 import { AppService } from '../app.service';
+import { Seance } from '../seance';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-movies-component',
@@ -17,6 +19,7 @@ export class MoviesComponentComponent implements OnInit {
   selected = false;
   newMovie: Movie;
   show = false;
+  seanses: Seance[];
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
@@ -43,6 +46,14 @@ export class MoviesComponentComponent implements OnInit {
   }
 
   delete(which: number): void {
+    this.appService.getSeanses().subscribe((seansesList: Seance[]) => {
+      this.seanses = seansesList;
+      console.log(seansesList);
+    });
+    if (this.seanses.find(x => x.movie.id == which)){
+      Swal.fire('Ostrzeżenie!', 'Nie można usunąć filmu, dla którego istnieją seanse', 'warning');
+      return;
+    }
     let idx = this.movieList.findIndex((x) => x.id == which);
     this.movieList.splice(idx, 1);
     this.appService.deleteMovie(which).subscribe((x) => console.log(x));
